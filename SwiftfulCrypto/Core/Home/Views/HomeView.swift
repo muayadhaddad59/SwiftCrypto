@@ -12,6 +12,7 @@ struct HomeView: View {
     @EnvironmentObject private var vm: HomeViewModel
     @State private var showPortfolio: Bool = false
     
+    
     var body: some View {
         ZStack{
             // Background layer
@@ -20,19 +21,21 @@ struct HomeView: View {
             // Content layer
             VStack{
                 // Home Header View which containes two ICONS BUTTON
-                    homeHeader
+                homeHeader
+                SearchBarView(searchText: $vm.searchText)
+                
                 // HEADER Row that displays the header o data
-                    headerView
+                headerView
                 // List: Of Coins and portfolio
                 if !showPortfolio{
                     allCoinsList
-                    .transition(.move(edge: .leading))
+                        .transition(.move(edge: .leading))
                 }else{
                     porfolioCoinsList
                         .transition(.move(edge: .trailing))
                 }
                 
-               
+                
                 Spacer(minLength: 0)
             }
         }
@@ -56,7 +59,7 @@ extension HomeView{
             CircleButtonView(iconName: showPortfolio ? "plus" : "info")
                 .animation(.none)
                 .background(
-                CircleButtonAnimationView(animate: $showPortfolio)
+                    CircleButtonAnimationView(animate: $showPortfolio)
                 )
             Spacer()
             Text(showPortfolio ? "Portfolio" : "Live Prices")
@@ -84,7 +87,7 @@ extension HomeView{
     private var allCoinsList: some View{
         List{
             ForEach(vm.allCoins){coin in
-            CoinRowView(coin: coin, showHoldingsColumn: false)
+                CoinRowView(coin: coin, showHoldingsColumn: false)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
             }
         }
@@ -94,13 +97,13 @@ extension HomeView{
 // MARK:  All coin Portolo
 extension HomeView{
     private var porfolioCoinsList: some View{
-            List{
-                ForEach(vm.allCoins){coin in
+        List{
+            ForEach(vm.allCoins){coin in
                 CoinRowView(coin: coin, showHoldingsColumn: true)
-                        .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
-                }
+                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
             }
-            .listStyle(PlainListStyle())
+        }
+        .listStyle(PlainListStyle())
     }
 }
 
