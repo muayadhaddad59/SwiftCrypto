@@ -104,6 +104,7 @@ extension HomeView{
         .listStyle(PlainListStyle())
     }
 }
+
 // MARK:  All coin Portolo
 extension HomeView{
     private var porfolioCoinsList: some View{
@@ -126,6 +127,15 @@ extension HomeView{
             showPortfolio ? Text("Holdings") : nil
             Text("Price")
                 .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+            
+            Button(action: {
+                withAnimation(.linear(duration: 2.0)) {
+                    vm.reloadData()
+                }
+            }, label: {
+                Image(systemName: "goforward")
+            })
+            .rotationEffect(Angle(degrees: vm.isLoading ? 360 : 0),anchor: .center)
         }
         .font(.caption)
         .foregroundStyle(Color.theme.secondaryText)

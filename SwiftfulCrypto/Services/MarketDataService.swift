@@ -21,7 +21,7 @@ class MarketDataService{
         getData()
     }
     
-    private func getData(){
+     func getData(){
         marketDataSubscripition = NetworkingManager.download(urlString: baseURl)
             .decode(type: GlobalData.self, decoder: JSONDecoder())
             .sink(

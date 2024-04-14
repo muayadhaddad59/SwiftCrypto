@@ -17,7 +17,7 @@ class CoinDataService{
         getCoins()
     }
     
-    private func getCoins(){
+     func getCoins(){
         coinSubscripition = NetworkingManager.download(urlString: baseURl)
             .decode(type: [CoinModel].self, decoder: JSONDecoder())
             .sink(
