@@ -17,9 +17,7 @@ struct SearchBarView: View {
                 .foregroundStyle(Color.theme.secondaryText)
             
             TextField("Search by name or symbool..", text: $searchText)
-                .foregroundStyle(
-                    searchText.isEmpty ? Color.theme.secondaryText : Color.theme.accent)
-                .autocorrectionDisabled(true)
+                
             
                 .overlay (
                     Image(systemName: "xmark.circle.fill")

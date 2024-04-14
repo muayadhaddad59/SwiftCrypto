@@ -10,7 +10,8 @@ import Combine
 
 class MarketDataService{
     
-    let baseURl = "https://api.coingecko.com/api/v3/global?x_cg_pro_api_key=CG-Kn77CExSCifZkz7Y5hBAiqKj?x_cg_pro_api_key=CG-Kn77CExSCifZkz7Y5hBAiqKj"
+    let baseURl = "https://api.coingecko.com/api/v3/global"
+
     
     @Published var marketData: MarketDataModel? = nil
     
@@ -24,7 +25,7 @@ class MarketDataService{
         marketDataSubscripition = NetworkingManager.download(urlString: baseURl)
             .decode(type: GlobalData.self, decoder: JSONDecoder())
             .sink(
-                receiveCompletion: NetworkingManager.handlecompletion,
+                receiveCompletion: NetworkingManager.handleCompletion,
                 receiveValue: { [weak self] returnedGlobalData in
                     self?.marketData = returnedGlobalData.data
                     self?.marketDataSubscripition?.cancel()

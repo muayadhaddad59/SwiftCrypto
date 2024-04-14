@@ -38,7 +38,7 @@ class CoinImageService{
                 return UIImage(data: data)
             })
             .sink(
-                receiveCompletion: NetworkingManager.handlecompletion,
+                receiveCompletion: NetworkingManager.handleCompletion,
                 receiveValue: { [weak self] returnedImage in
                     guard let self = self, let downloadedImage = returnedImage else { return }
                     self.image = downloadedImage

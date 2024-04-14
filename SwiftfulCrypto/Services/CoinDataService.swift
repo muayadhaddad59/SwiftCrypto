@@ -21,7 +21,7 @@ class CoinDataService{
         coinSubscripition = NetworkingManager.download(urlString: baseURl)
             .decode(type: [CoinModel].self, decoder: JSONDecoder())
             .sink(
-                receiveCompletion: NetworkingManager.handlecompletion,
+                receiveCompletion: NetworkingManager.handleCompletion,
                 receiveValue: { [weak self] returnedCoins in
                     self?.allCoins = returnedCoins
                     self?.coinSubscripition?.cancel()
