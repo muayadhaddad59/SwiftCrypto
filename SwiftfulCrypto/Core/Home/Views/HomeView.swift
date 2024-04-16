@@ -12,7 +12,8 @@ struct HomeView: View {
     @EnvironmentObject private var vm: HomeViewModel
     @State private var showPortfolio: Bool = false // Animate right
     @State private var showPorfoliView: Bool = false // new sheet
-    
+    @State private var selectedCoin: CoinModel? = nil
+    @State private var showDetailViwe: Bool = false
     var body: some View {
         ZStack{
             // Background layer
@@ -41,11 +42,14 @@ struct HomeView: View {
                     porfolioCoinsList
                         .transition(.move(edge: .trailing))
                 }
-                
-                
                 Spacer(minLength: 0)
             }
         }
+        .background(
+            NavigationLink(isActive: $showDetailViwe, destination: {DetailLoadinView(coin: $selectedCoin)},
+                           label: {EmptyView()})
+            
+        )
     }
 }
 
@@ -99,11 +103,21 @@ extension HomeView{
             ForEach(vm.allCoins){coin in
                 CoinRowView(coin: coin, showHoldingsColumn: false)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                    .onTapGesture {
+                        segue(coin: coin)
+                    }
             }
         }
         .listStyle(PlainListStyle())
     }
+    private func segue(coin: CoinModel){
+        selectedCoin = coin
+        showDetailViwe.toggle()
+    }
 }
+
+
+
 
 // MARK:  All coin Portolo
 extension HomeView{
@@ -112,6 +126,9 @@ extension HomeView{
             ForEach(vm.portfolioCoins){coin in
                 CoinRowView(coin: coin, showHoldingsColumn: true)
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                    .onTapGesture {
+                        segue(coin: coin)
+                    }
             }
         }
         .listStyle(PlainListStyle())
