@@ -141,11 +141,11 @@ extension HomeView{
                 Text("Holdings")
                 Image(systemName: "chevron.down")
                     .opacity((vm.sortOption == .holdings || vm.sortOption == .holdingReversed) ? 1.0: 0.0)
-                    .rotationEffect(Angle(degrees: vm.sortOption == .rank ? 0 : 180))
+                    .rotationEffect(Angle(degrees: vm.sortOption == .holdings ? 0 : 180))
             }
             .onTapGesture {
                 withAnimation {
-                    vm.sortOption = vm.sortOption == .holdings ? .holdings : .holdingReversed
+                    vm.sortOption = vm.sortOption == .holdings ? .holdingReversed : .holdings
                 }
             }
             : nil
