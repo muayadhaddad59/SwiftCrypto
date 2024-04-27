@@ -113,7 +113,12 @@ struct CoinDetailModel: Codable {
     var readableDescription: String? {
         return description?.en?.removingHTMLOccurances
     }
+    
+  
+    
 }
+
+
 
 struct Links: Codable {
     let homepage: [String]?
